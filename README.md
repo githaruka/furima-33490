@@ -14,8 +14,7 @@
 ### Association
 
 - has_many :items
-- has_one :address
-- has_one :buy_item
+- has_many :buy_items
 
 ## items テーブル
 
@@ -48,6 +47,9 @@
 | phone_number      | string  | null: false |
 | buy_item          | references | null: false, foreign_key: true |
 
+### Association 
+
+- belongs_to :buy_item
 
 ## buy_items テーブル
 
