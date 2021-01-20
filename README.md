@@ -21,8 +21,8 @@
 
 | Column               | Type       | Options     |
 | -------------------- | ---------- | ----------- |
-| item_name            | string     | null: false |
-| item_info            | text       | null: false |
+| name                 | string     | null: false |
+| info                 | text       | null: false |
 | category_id          | integer    | null: false |
 | status_id            | integer    | null: false |
 | shipping_cost_id     | integer    | null: false |
@@ -51,10 +51,10 @@
 
 ## buy_items テーブル
 
-| Column      | Type    | Options     |
-| ----------- | ------- | ----------- |
-| buy_user_id | integer | null: false |
-| buy_item_id | integer | null: false |
+| Column  | Type    | Options     |
+| ------- | ------- | ----------- |
+| user    | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
 
 ### Association
 
