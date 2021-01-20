@@ -4,13 +4,12 @@
 | ------------------- | ------ | ----------- |
 | nickname            | string | null: false |
 | email               | string | null: false |
-| password            | string | null: false |
 | encrypted_password  | string | null: false |
 | last_name           | string | null: false |
 | first_name          | string | null: false |
 | last_kana           | string | null: false |
 | first_kana          | string | null: false |
-| birthday            | string | null: false |
+| birthday            | date   | null: false |
 
 ### Association
 
@@ -30,9 +29,9 @@
 | area_id              | integer    | null: false |
 | delivery_schedule_id | integer    | null: false |
 | price                | integer    | null: false |
-| user                 | references |
+| user                 | references | null: false, foreign_key: true |
 
-### Association
+### Association 
 
 - belongs_to :user
 - has_one :buy_item
@@ -47,10 +46,8 @@
 | address           | string  | null: false |
 | building          | string  | 
 | phone_number      | string  | null: false |
+| buy_item          | references | null: false, foreign_key: true |
 
-### Association
-
-- belongs_to :user
 
 ## buy_items テーブル
 
@@ -63,3 +60,4 @@
 
 - belongs_to :user
 - belongs_to :item
+- has_one :address
