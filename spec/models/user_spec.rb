@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  before do
+    @user = FactoryBot.build(:user)
+  end
   describe '#create' do
     describe "ユーザー新規登録/ユーザー情報" do
       context '新規登録できるとき' do
@@ -8,7 +11,7 @@ RSpec.describe User, type: :model do
           expect(@user).to be_valid
         end
       end
-    
+
       context '新規登録できないとき' do
         it "nicknameが空では登録できない" do
           @user.nickname = nil
@@ -80,9 +83,6 @@ RSpec.describe User, type: :model do
     end
 
     describe "ユーザー新規登録/本人確認" do
-      before do
-        @user = FactoryBot.build(:user)
-      end
       it "last_kanaが全角カタカナでなければ登録できない" do
         @user.last_kana = "ｱｲｳｴｵ"
         @user.valid?
@@ -114,12 +114,35 @@ RSpec.describe User, type: :model do
       end
     
       it "first_kanaが空では登録できない" do
-        @user.first_name = nil
+        @user.first_kana = nil
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name can't be blank")
+        expect(@user.errors.full_messages).to include("First kana can't be blank")
       end
 
-      
+      it "last_kanaが半角文字では登録できない" do
+        @user.last_kana = "ｱｲｳｴｵ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last kana is invalid") 
+      end
+
+      it "first_kanaが半角文字では登録できない" do
+        @user.first_kana = "ｱｲｳｴｵ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First kana is invalid") 
+      end
+
+      it "last_kanaがカタカナ以外の全角文字では登録できない" do
+        @user.last_kana = "あいうえお"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last kana is invalid") 
+      end
+
+      it "first_kanaがカタカナ以外の全角文字では登録できない" do
+        @user.first_kana = "あいうえお"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First kana is invalid") 
+      end
+
       it "birthdayが空では登録できない" do
         @user.birthday = nil
         @user.valid?
