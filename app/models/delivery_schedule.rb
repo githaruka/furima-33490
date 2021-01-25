@@ -1,9 +1,9 @@
-class Shipping_cost < ActiveHash::Base
+class DeliverySchedule < ActiveHash::Base
   self.data = [
-    { id: 1, name: '--' },
-    { id: 2, name: '1~2日で発送' },
-    { id: 3, name: '2~3日で発送' },
-    { id: 4, name: '4~7日で発送' },
+    { id: 1, delivery_schedule: '--' },
+    { id: 2, delivery_schedule: '1~2日で発送' },
+    { id: 3, delivery_schedule: '2~3日で発送' },
+    { id: 4, delivery_schedule: '4~7日で発送' },
   ]
 
   include ActiveHash::Associations
