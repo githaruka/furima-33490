@@ -31,31 +31,31 @@ RSpec.describe Item, type: :model do
       end
 
       it 'category_idが1では登録できない' do
-        @item.category_id = '1'
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
 
       it 'status_idが1では登録できない' do
-        @item.status_id = '1'
+        @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Status must be other than 1')
       end
 
       it 'shipping_cost_idが1では登録できない' do
-        @item.shipping_cost_id = '1'
+        @item.shipping_cost_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Shipping cost must be other than 1')
       end
 
       it 'prefecture_idが1では登録できない' do
-        @item.prefecture_id = '1'
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
       end
 
       it 'delivery_schedule_idが1では登録できない' do
-        @item.delivery_schedule_id = '1'
+        @item.delivery_schedule_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Delivery schedule must be other than 1')
       end
@@ -67,13 +67,13 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceの値が299円以下では登録できない' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
 
       it 'priceが9999999円以上では登録できない' do
-        @item.price = '99999999'
+        @item.price = 99999999
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than 9999999')
       end
