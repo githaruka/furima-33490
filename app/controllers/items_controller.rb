@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :item_substitution, only: [:show, :edit, :update]
+  before_action :item_substitution, except: [:index, :new, :create]
   def index
     @items = Item.order('created_at DESC').includes(:user)
   end
@@ -34,7 +34,13 @@ class ItemsController < ApplicationController
     end
   end 
 
-  private
+  def destroy
+    unless  current_user.id == @item.user_id
+      redirect_to item_path
+    else @item.destroy
+      redirect_to root_path 
+    end
+  end
 
   def item_params
     params.require(:item).permit(:image, :name, :info, :category_id, :status_id, :shipping_cost_id, :prefecture_id,
