@@ -23,6 +23,9 @@ class ItemsController < ApplicationController
 
   def edit
     redirect_to root_path unless current_user.id == @item.user_id
+    if @item.order.present? 
+      root_path and return
+    end
   end
 
   def update
@@ -41,6 +44,8 @@ class ItemsController < ApplicationController
       redirect_to item_path
     end
   end
+
+  private
 
   def item_params
     params.require(:item).permit(:image, :name, :info, :category_id, :status_id, :shipping_cost_id, :prefecture_id,
