@@ -1,19 +1,19 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :item_substitution
 
   def index
-    @item = Item.find(params[:item_id])
     @buy_form = BuyForm.new
     if current_user == @item.user
       redirect_to root_path
-    else @item.order.present?
-      redirect_to root_path
+    end
+    if @item.order.present?
+      redirect_to root_path and return
     end
   end
 
   def create
     @buy_form = BuyForm.new(order_params)
-    @item = Item.find(params[:item_id])
     if @buy_form.valid?
       pay_item
       @buy_form.save
@@ -38,5 +38,9 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def item_substitution
+    @item = Item.find(params[:item_id])
   end
 end

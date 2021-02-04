@@ -1,6 +1,5 @@
 class Item < ApplicationRecord
   belongs_to :user
-  has_one :address
   has_one :order
 
   extend ActiveHash::Associations::ActiveRecordExtensions
